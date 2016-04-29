@@ -3,11 +3,12 @@ import random
 from anagram import is_anagram
 
 """
-Using Python's built-in unittest framework, any member function whose name begins
-with test in a class deriving from unittest.TestCase will be run, and its assertions
+We test the algorithm using Python's built-in unittest framework.
+Create a class for your collection of test cases, it must inherits from unittest.TestCase.
+Any member function whose name begins with test will be run, and its assertions
 checked, when unittest.main() is called.
-
 """
+
 class AnagramTestCase(unittest.TestCase):
     """ Collections of tests for is_anagram method"""
 
@@ -37,8 +38,9 @@ class AnagramTestCase(unittest.TestCase):
     def test_is_not_anagram(self):
         self.assertFalse(is_anagram("window", "water"))
 
-    # Calling a test method in a loop is perfectly valid, you can
-    # now the one that failed using the msg parameter
+    # Calling a test method in a loop is ok, for example to extend the coverage
+    # of the tests with a set of random inputs. You can track the one that failed
+    # using the msg parameter
     def test_random_anagram_n_strings(self):
         for i in range(20):
             astring = self.generate_random_string(30)
@@ -46,7 +48,7 @@ class AnagramTestCase(unittest.TestCase):
             self.assertTrue(is_anagram(astring,astring_shuffled),msg='{} was the input string'.format(astring))
 
     # Test always the boundaries of your logic and how it handles uncommon
-    # input. You need to know clearly the spec for these situations in order
+    # inputs. You need to know clearly the specs for these situations in order
     # to write the correct assert.
     def test_is_empty_string(self):
         self.assertTrue(is_anagram("",""))
@@ -65,5 +67,6 @@ class AnagramTestCase(unittest.TestCase):
         random.shuffle(l)
         return ''.join(l)
 
+# You call test cases by executing the main method of the unittest class 
 if __name__ == '__main__':
     unittest.main()
