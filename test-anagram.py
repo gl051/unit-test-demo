@@ -1,5 +1,6 @@
 import unittest
 import random
+from faker import Factory
 from anagram import is_anagram
 
 """
@@ -59,14 +60,14 @@ class AnagramTestCase(unittest.TestCase):
     # You can have accessory functions for the TestCase that will no be run
     # as a test case if they do not start with test_
     def generate_random_string(self, length):
-        alphabet = 'abcdefghijklmnopqrstuvwxyz'
-        return ''.join([random.choice(alphabet) for i in range(length)])
+        fake = Factory.create()
+        return fake.text(10)
 
     def shuffle_string(self, astring):
         l = list(astring)
         random.shuffle(l)
         return ''.join(l)
 
-# You call test cases by executing the main method of the unittest class 
+# You call test cases by executing the main method of the unittest class
 if __name__ == '__main__':
     unittest.main()
